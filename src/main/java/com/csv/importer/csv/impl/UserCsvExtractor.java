@@ -1,14 +1,7 @@
 package com.csv.importer.csv.impl;
 
 import com.csv.importer.csv.AbstractCsvExtractor;
-import com.csv.importer.csv.dto.CsvExtractResult;
 import com.univocity.parsers.csv.CsvParser;
-import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.Resource;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class UserCsvExtractor extends AbstractCsvExtractor {
 
@@ -18,21 +11,13 @@ public class UserCsvExtractor extends AbstractCsvExtractor {
 
     @Override
     public boolean isValid(String[] row) {
-        String name = row[0];
-        String email = row[1];
-        String age = row[2];
-        if(name == null || name.isBlank()){
+        if(!isBlank(row[0])){
             return false;
         }
-        if(email == null || !email.contains("@")){
+        if(!isBlank(row[1]) || !row[1].contains("@")){
             return false;
         }
-        try{
-            int ageNumber = Integer.parseInt(age);
-            if(ageNumber<0){
-                return false;
-            }
-        }catch (NumberFormatException e){
+        if(!isPositiveInteger(row[2])){
             return false;
         }
         return true;

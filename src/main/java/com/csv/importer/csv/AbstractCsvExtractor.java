@@ -31,4 +31,29 @@ public abstract class AbstractCsvExtractor {
 
     public abstract boolean isValid(String[] row);
 
+    protected boolean isBlank(String record){
+        return record != null && !record.isBlank();
+    }
+
+    protected boolean isInteger(String record){
+        try {
+            int number = Integer.parseInt(record);
+        }catch (NumberFormatException e){
+            return false;
+        }
+        return true;
+    }
+
+    protected boolean isPositiveInteger(String record){
+        try{
+            int number = Integer.parseInt(record);
+            if(number<0){
+                return false;
+            }
+        }catch (NumberFormatException e){
+            return false;
+        }
+        return true;
+    }
+
 }
