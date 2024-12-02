@@ -1,6 +1,7 @@
 package com.csv.importer.csv.impl;
 
 import com.csv.importer.csv.dto.CsvExtractResult;
+import com.csv.importer.csv.extractor.impl.UserCsvExtractor;
 import com.csv.importer.file.access.impl.LocalFileSystemAccessObject;
 import com.univocity.parsers.csv.CsvParser;
 import com.univocity.parsers.csv.CsvParserSettings;

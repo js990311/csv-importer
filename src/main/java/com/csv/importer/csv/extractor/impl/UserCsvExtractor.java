@@ -1,8 +1,10 @@
-package com.csv.importer.csv.impl;
+package com.csv.importer.csv.extractor.impl;
 
-import com.csv.importer.csv.AbstractCsvExtractor;
+import com.csv.importer.csv.extractor.AbstractCsvExtractor;
 import com.univocity.parsers.csv.CsvParser;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserCsvExtractor extends AbstractCsvExtractor {
 
     public UserCsvExtractor(CsvParser parser){

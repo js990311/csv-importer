@@ -1,7 +1,8 @@
-package com.csv.importer.csv;
+package com.csv.importer.csv.extractor;
 
 import com.csv.importer.csv.dto.CsvExtractResult;
 import com.univocity.parsers.csv.CsvParser;
+import com.univocity.parsers.csv.CsvParserSettings;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 
@@ -11,11 +12,16 @@ import java.io.InputStreamReader;
 
 @RequiredArgsConstructor
 public abstract class AbstractCsvExtractor {
-    private final CsvParser parser;
+    public CsvParser getCsvParser(){
+        CsvParserSettings settings = new CsvParserSettings();
+        settings.setHeaderExtractionEnabled(true);
+        return new CsvParser(settings);
+    }
 
     public CsvExtractResult extract(Resource resource){
+        CsvParser parser = getCsvParser();
+        CsvExtractResult ret = new CsvExtractResult();
         try(BufferedReader reader = new BufferedReader(new InputStreamReader(resource.getInputStream()))){
-            CsvExtractResult ret = new CsvExtractResult();
             for(String[] row : parser.iterate(reader)){
                 if(isValid(row)){
                     ret.addValidRecords(row);
@@ -23,10 +29,10 @@ public abstract class AbstractCsvExtractor {
                     ret.addInValidRecords(row);
                 }
             }
-            return ret;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        return ret;
     }
 
     public abstract boolean isValid(String[] row);

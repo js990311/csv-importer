@@ -26,7 +26,7 @@ public class Files {
         return fileStoreName + "." + fileExtension;
     }
 
-    private String extractExtension(String filename){
+    private static String extractExtension(String filename){
         int dotIdx = filename.lastIndexOf('.');
         return filename.substring(dotIdx+1);
     }
@@ -36,4 +36,5 @@ public class Files {
         this.fileExtension = extractExtension(originalFileName);
         this.fileStoreName = UUID.randomUUID().toString();
     }
+
 }
