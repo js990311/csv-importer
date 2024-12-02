@@ -10,9 +10,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-@RequiredArgsConstructor
 public class UserCsvExtractor extends AbstractCsvExtractor {
-    private final CsvParser parser;
+
+    public UserCsvExtractor(CsvParser parser){
+        super(parser);
+    }
 
     @Override
     public boolean isValid(String[] row) {
@@ -27,7 +29,7 @@ public class UserCsvExtractor extends AbstractCsvExtractor {
         }
         try{
             int ageNumber = Integer.parseInt(age);
-            if(ageNumber>0){
+            if(ageNumber<0){
                 return false;
             }
         }catch (NumberFormatException e){
