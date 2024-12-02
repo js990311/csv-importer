@@ -1,7 +1,7 @@
 package com.csv.importer.csv.impl;
 
 import com.csv.importer.csv.dto.CsvExtractResult;
-import com.csv.importer.file.impl.LocalFileSystemAccessObject;
+import com.csv.importer.file.access.impl.LocalFileSystemAccessObject;
 import com.univocity.parsers.csv.CsvParser;
 import com.univocity.parsers.csv.CsvParserSettings;
 import org.junit.jupiter.api.Test;

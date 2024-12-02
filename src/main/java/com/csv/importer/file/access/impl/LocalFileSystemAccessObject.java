@@ -1,9 +1,8 @@
-package com.csv.importer.file.impl;
+package com.csv.importer.file.access.impl;
 
-import com.csv.importer.file.FileSystemAccessObject;
+import com.csv.importer.file.access.FileSystemAccessObject;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
-import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;

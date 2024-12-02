@@ -1,7 +1,7 @@
 package com.csv.importer.file.config;
 
-import com.csv.importer.file.FileSystemAccessObject;
-import com.csv.importer.file.impl.LocalFileSystemAccessObject;
+import com.csv.importer.file.access.FileSystemAccessObject;
+import com.csv.importer.file.access.impl.LocalFileSystemAccessObject;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
