@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
 
 public class LocalFileSystemAccessObject implements FileSystemAccessObject {
 
-    private static String ROOT = "/file";
+    private static String ROOT = "file/";
 
     @Override
     public void save(String path, MultipartFile file) {
