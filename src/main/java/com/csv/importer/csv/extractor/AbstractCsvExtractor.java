@@ -52,6 +52,16 @@ public abstract class AbstractCsvExtractor {
         return true;
     }
 
+    protected boolean isLong(String record){
+        try {
+            Long number = Long.parseLong(record);
+        }catch (NumberFormatException e){
+            return false;
+        }
+        return true;
+
+    }
+
     protected boolean isPositiveInteger(String record){
         try{
             int number = Integer.parseInt(record);

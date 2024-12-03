@@ -15,17 +15,15 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping("/books")
-    public ListResponse findAll(){
-        return new ListResponse(bookService.findAll());
+    public ListSizeResponse findAll(){
+        return new ListSizeResponse(bookService.findAll());
     }
 
     @Getter
-    public static class ListResponse{
+    public static class ListSizeResponse{
         private Integer count;
-        private List<TempLibraryBookDto> tbooks;
-        public ListResponse(List<TempLibraryBookDto> books) {
+        public ListSizeResponse(List<TempLibraryBookDto> books) {
             count = books.size();
-            this.tbooks = books;
         }
     }
 }
