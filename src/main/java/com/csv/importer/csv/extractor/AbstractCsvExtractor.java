@@ -1,6 +1,7 @@
 package com.csv.importer.csv.extractor;
 
 import com.csv.importer.csv.dto.CsvExtractResult;
+import com.csv.importer.csv.type.CsvEntityType;
 import com.univocity.parsers.csv.CsvParser;
 import com.univocity.parsers.csv.CsvParserSettings;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,9 @@ import java.io.InputStreamReader;
 
 @RequiredArgsConstructor
 public abstract class AbstractCsvExtractor {
+    public abstract boolean isSupport(CsvEntityType type);
+    public abstract boolean isValid(String[] row);
+
     public CsvParser getCsvParser(){
         CsvParserSettings settings = new CsvParserSettings();
         settings.setHeaderExtractionEnabled(true);
@@ -34,8 +38,6 @@ public abstract class AbstractCsvExtractor {
         }
         return ret;
     }
-
-    public abstract boolean isValid(String[] row);
 
     protected boolean isBlank(String record){
         return record != null && !record.isBlank();

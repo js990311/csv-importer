@@ -1,11 +1,17 @@
 package com.csv.importer.csv.extractor.impl;
 
 import com.csv.importer.csv.extractor.AbstractCsvExtractor;
+import com.csv.importer.csv.type.CsvEntityType;
 import com.univocity.parsers.csv.CsvParser;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserCsvExtractor extends AbstractCsvExtractor {
+
+    @Override
+    public boolean isSupport(CsvEntityType type) {
+        return type == CsvEntityType.User;
+    }
 
     @Override
     public boolean isValid(String[] row) {

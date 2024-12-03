@@ -2,6 +2,7 @@ package com.csv.importer.csv.service;
 
 import com.csv.importer.csv.dto.CsvExtractResult;
 import com.csv.importer.csv.dto.CsvUploadDto;
+import com.csv.importer.csv.extractor.CsvExtractorManager;
 import com.csv.importer.csv.extractor.impl.UserCsvExtractor;
 import com.csv.importer.csv.writer.impl.UserCsvWriter;
 import com.csv.importer.csv.file.dto.CsvFilesDto;
@@ -17,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Service
 public class CsvService {
-    private final UserCsvExtractor userCsvExtractor;
+    private final CsvExtractorManager extractorManager;
     private final FilesService filesService;
     private final UserCsvWriter userCsvWriter;
     private final UserBatchInsertRepository userBatchInsertRepository;
@@ -25,7 +26,7 @@ public class CsvService {
     @Transactional
     public CsvUploadDto extractCsv(String filename){
         CsvFilesDto csvFile = filesService.loadForCsv(filename);
-        CsvExtractResult result = userCsvExtractor.extract(csvFile.getResource());
+        CsvExtractResult result = extractorManager.extract(csvFile.getFiles().getType() ,csvFile.getResource());
 
         String originalFileName = csvFile.getFiles().getOriginalFileName();
         int dotIdx = originalFileName.lastIndexOf('.');
