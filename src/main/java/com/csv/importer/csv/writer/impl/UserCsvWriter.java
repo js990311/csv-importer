@@ -5,11 +5,13 @@ import com.univocity.parsers.csv.CsvWriter;
 import com.univocity.parsers.csv.CsvWriterSettings;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+@Component
 public class UserCsvWriter extends InvalidCsvWriter {
 
     private String[] headers = new String[]{"name", "email", "age"};

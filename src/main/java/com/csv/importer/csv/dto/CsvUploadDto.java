@@ -6,19 +6,22 @@ import lombok.Getter;
 
 @Getter
 public class CsvUploadDto {
+    private FilesDto validDataFiles;
     private FilesDto inValidDataFiles;
     private Integer validDatas;
     private Integer inValidDatas;
 
-    public CsvUploadDto(FilesDto inValidDataFiles, Integer validDatas, Integer inValidDatas) {
+    public CsvUploadDto(FilesDto validDataFiles, FilesDto inValidDataFiles, Integer validDatas, Integer inValidDatas) {
+        this.validDataFiles = validDataFiles;
         this.inValidDataFiles = inValidDataFiles;
         this.validDatas = validDatas;
         this.inValidDatas = inValidDatas;
     }
 
-    public static CsvUploadDto from(Files files, CsvExtractResult extractResult){
+    public static CsvUploadDto from(Files validFile, Files invalidFile, CsvExtractResult extractResult){
         return new CsvUploadDto(
-                FilesDto.from(files),
+                FilesDto.from(validFile),
+                FilesDto.from(invalidFile),
                 extractResult.getValidRecords().size(),
                 extractResult.getInValidRecords().size()
         );

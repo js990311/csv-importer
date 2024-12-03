@@ -24,6 +24,12 @@ public class FilesService {
     private final FileSystemAccessObject fileSystemAO;
 
     @Transactional
+    public void saveCsvFile(Files files, Resource resource){
+        filesRepository.save(files);
+        fileSystemAO.save(files.getStorePath(), resource);
+    }
+
+    @Transactional
     public FilesDto saveFile(CsvEntityType type, MultipartFile file){
         String originalFilename = file.getOriginalFilename();
         Files files = new Files(type, originalFilename);
