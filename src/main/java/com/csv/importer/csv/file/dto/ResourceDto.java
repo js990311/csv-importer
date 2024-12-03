@@ -1,4 +1,4 @@
-package com.csv.importer.file.dto;
+package com.csv.importer.csv.file.dto;
 
 import lombok.Getter;
 import org.springframework.core.io.Resource;

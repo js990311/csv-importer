@@ -1,9 +1,9 @@
-package com.csv.importer.file.controller;
+package com.csv.importer.csv.file.controller;
 
+import com.csv.importer.csv.file.dto.FilesDto;
+import com.csv.importer.csv.file.dto.ResourceDto;
+import com.csv.importer.csv.file.service.FilesService;
 import com.csv.importer.csv.type.CsvEntityType;
-import com.csv.importer.file.dto.FilesDto;
-import com.csv.importer.file.dto.ResourceDto;
-import com.csv.importer.file.service.FilesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;

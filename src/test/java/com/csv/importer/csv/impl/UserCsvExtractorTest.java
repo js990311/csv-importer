@@ -2,9 +2,7 @@ package com.csv.importer.csv.impl;
 
 import com.csv.importer.csv.dto.CsvExtractResult;
 import com.csv.importer.csv.extractor.impl.UserCsvExtractor;
-import com.csv.importer.file.access.impl.LocalFileSystemAccessObject;
-import com.univocity.parsers.csv.CsvParser;
-import com.univocity.parsers.csv.CsvParserSettings;
+import com.csv.importer.csv.file.access.impl.LocalFileSystemAccessObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.io.Resource;
 

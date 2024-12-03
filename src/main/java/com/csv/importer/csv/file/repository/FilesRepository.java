@@ -1,6 +1,6 @@
-package com.csv.importer.file.repository;
+package com.csv.importer.csv.file.repository;
 
-import com.csv.importer.file.entity.Files;
+import com.csv.importer.csv.file.entity.Files;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package com.csv.importer.file.entity;
+package com.csv.importer.csv.file.entity;
 
 import com.csv.importer.csv.type.CsvEntityType;
 import jakarta.persistence.*;

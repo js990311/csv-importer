@@ -1,12 +1,12 @@
-package com.csv.importer.file.service;
+package com.csv.importer.csv.file.service;
 
+import com.csv.importer.csv.file.access.FileSystemAccessObject;
+import com.csv.importer.csv.file.dto.FilesDto;
+import com.csv.importer.csv.file.repository.FilesRepository;
 import com.csv.importer.csv.type.CsvEntityType;
-import com.csv.importer.file.access.FileSystemAccessObject;
-import com.csv.importer.file.dto.CsvFilesDto;
-import com.csv.importer.file.dto.FilesDto;
-import com.csv.importer.file.dto.ResourceDto;
-import com.csv.importer.file.entity.Files;
-import com.csv.importer.file.repository.FilesRepository;
+import com.csv.importer.csv.file.dto.CsvFilesDto;
+import com.csv.importer.csv.file.dto.ResourceDto;
+import com.csv.importer.csv.file.entity.Files;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;

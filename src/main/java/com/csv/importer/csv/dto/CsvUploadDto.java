@@ -1,7 +1,7 @@
 package com.csv.importer.csv.dto;
 
-import com.csv.importer.file.dto.FilesDto;
-import com.csv.importer.file.entity.Files;
+import com.csv.importer.csv.file.dto.FilesDto;
+import com.csv.importer.csv.file.entity.Files;
 import lombok.Getter;
 
 @Getter

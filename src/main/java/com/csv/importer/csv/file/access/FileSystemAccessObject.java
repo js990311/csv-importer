@@ -1,4 +1,4 @@
-package com.csv.importer.file.access;
+package com.csv.importer.csv.file.access;
 
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
