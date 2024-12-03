@@ -1,6 +1,8 @@
 package com.csv.importer.file.service;
 
+import com.csv.importer.csv.type.CsvEntityType;
 import com.csv.importer.file.access.FileSystemAccessObject;
+import com.csv.importer.file.dto.CsvFilesDto;
 import com.csv.importer.file.dto.FilesDto;
 import com.csv.importer.file.dto.ResourceDto;
 import com.csv.importer.file.entity.Files;
@@ -22,9 +24,9 @@ public class FilesService {
     private final FileSystemAccessObject fileSystemAO;
 
     @Transactional
-    public FilesDto saveFile(MultipartFile file){
+    public FilesDto saveFile(CsvEntityType type, MultipartFile file){
         String originalFilename = file.getOriginalFilename();
-        Files files = new Files(originalFilename);
+        Files files = new Files(type, originalFilename);
         fileSystemAO.save(files.getStorePath(), file);
         filesRepository.save(files);
         return FilesDto.from(files);
@@ -38,5 +40,15 @@ public class FilesService {
         Files files = opt.get();
         Resource resource = fileSystemAO.load(files.getStorePath());
         return new ResourceDto(resource, files.getOriginalFileName());
+    }
+
+    public CsvFilesDto loadForCsv(String filename){
+        Optional<Files> opt = filesRepository.findByFileStoreName(filename);
+        if(opt.isEmpty()){
+            throw new NoSuchElementException();
+        }
+        Files files = opt.get();
+        Resource resource = fileSystemAO.load(files.getStorePath());
+        return new CsvFilesDto(files, resource);
     }
 }

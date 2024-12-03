@@ -1,8 +1,7 @@
 package com.csv.importer.file.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.csv.importer.csv.type.CsvEntityType;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -22,6 +21,9 @@ public class Files {
 
     private String fileExtension;
 
+    @Enumerated(EnumType.STRING)
+    private CsvEntityType type;
+
     public String getStorePath(){
         return fileStoreName + "." + fileExtension;
     }
@@ -31,7 +33,8 @@ public class Files {
         return filename.substring(dotIdx+1);
     }
 
-    public Files(String originalFileName) {
+    public Files(CsvEntityType type, String originalFileName) {
+        this.type = type;
         this.originalFileName = originalFileName;
         this.fileExtension = extractExtension(originalFileName);
         this.fileStoreName = UUID.randomUUID().toString();

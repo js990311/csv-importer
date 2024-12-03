@@ -1,5 +1,6 @@
 package com.csv.importer.file.controller;
 
+import com.csv.importer.csv.type.CsvEntityType;
 import com.csv.importer.file.dto.FilesDto;
 import com.csv.importer.file.dto.ResourceDto;
 import com.csv.importer.file.service.FilesService;
@@ -17,8 +18,10 @@ public class FilesController {
     private final FilesService filesService;
 
     @PostMapping("/upload")
-    public FilesDto uploadFile(@RequestParam("file") MultipartFile file){
-        FilesDto filesDto = filesService.saveFile(file);
+    public FilesDto uploadFile(
+            @RequestParam("type") CsvEntityType type,
+            @RequestParam("file") MultipartFile file){
+        FilesDto filesDto = filesService.saveFile(type,file);
         return filesDto;
     }
 

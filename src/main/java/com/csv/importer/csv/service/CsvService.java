@@ -3,6 +3,7 @@ package com.csv.importer.csv.service;
 import com.csv.importer.csv.dto.CsvExtractResult;
 import com.csv.importer.csv.dto.CsvUploadDto;
 import com.csv.importer.csv.extractor.impl.UserCsvExtractor;
+import com.csv.importer.file.dto.CsvFilesDto;
 import com.csv.importer.file.dto.ResourceDto;
 import com.csv.importer.file.entity.Files;
 import com.csv.importer.file.service.FilesService;
@@ -19,14 +20,14 @@ public class CsvService {
 
     @Transactional
     public CsvUploadDto extractCsv(String filename){
-        ResourceDto resourceDto = filesService.loadByFilename(filename);
-        CsvExtractResult result = userCsvExtractor.extract(resourceDto.getResource());
-        String inValidFiles = createInValidFiles(resourceDto.getFilename());
+        CsvFilesDto csvFile = filesService.loadForCsv(filename);
+        CsvExtractResult result = userCsvExtractor.extract(csvFile.getResource());
+        String inValidFiles = createInValidFiles(csvFile.getFiles().getOriginalFileName());
 
         // TODO 실패한 데이터모음은 다음에...
-        Files files = new Files(inValidFiles);
+        Files invalidFile = new Files(csvFile.getFiles().getType(),inValidFiles);
 
-        return CsvUploadDto.from(files, result);
+        return CsvUploadDto.from(invalidFile, result);
     }
 
     private String createInValidFiles(String filename){
