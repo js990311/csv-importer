@@ -7,5 +7,6 @@ public interface FileSystemAccessObject {
 
     public void save(String path, MultipartFile file);
 
+    public void save(String path, Resource resource);
     public Resource load(String path);
 }

@@ -5,7 +5,10 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,6 +18,19 @@ import java.util.NoSuchElementException;
 public class LocalFileSystemAccessObject implements FileSystemAccessObject {
 
     private static String ROOT = "files/";
+
+    @Override
+    public void save(String path, Resource resource) {
+        String localSavePath = Paths.get(ROOT + path).toString();
+        File file = new File(localSavePath);
+
+        try (OutputStream outputStream = new FileOutputStream(file)) {
+            byte[] content = resource.getContentAsByteArray(); // Assuming Resource has a getContent method returning byte[]
+            outputStream.write(content);
+        } catch (IOException e) {
+            throw new RuntimeException();
+        }
+    }
 
     @Override
     public void save(String path, MultipartFile file) {

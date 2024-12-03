@@ -20,11 +20,11 @@ class UserCsvWriterTest {
         this.csvWriter = new UserCsvWriter();
     }
 
-
     @Test
     void writeCsv() {
         Resource load = fileSAO.load("asdf.csv");
         CsvExtractResult extract = csvExtractor.extract(load);
-        csvWriter.writeCsv(extract.getInValidRecords());
+        Resource resource = csvWriter.writeCsv(extract.getInValidRecords());
+        fileSAO.save("asdf-invalid.csv", resource);
     }
 }
