@@ -7,16 +7,17 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Component
 public class CsvExtractorManager {
     private final List<AbstractCsvExtractor> csvExtractors;
 
-    public CsvExtractResult extract(CsvEntityType type, Resource resource) {
+    public Optional<CsvExtractResult> extract(CsvEntityType type, Resource resource) {
         for(AbstractCsvExtractor csvExtractor : csvExtractors){
             if(csvExtractor.isSupport(type)){
-                return csvExtractor.extract(resource);
+                return Optional.of(csvExtractor.extract(resource));
             }
         }
         return null;

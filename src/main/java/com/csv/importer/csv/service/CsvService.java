@@ -4,6 +4,7 @@ import com.csv.importer.csv.dto.CsvExtractResult;
 import com.csv.importer.csv.dto.CsvUploadDto;
 import com.csv.importer.csv.extractor.CsvExtractorManager;
 import com.csv.importer.csv.extractor.impl.UserCsvExtractor;
+import com.csv.importer.csv.repository.CsvBatchInsertRepositoryManager;
 import com.csv.importer.csv.writer.impl.UserCsvWriter;
 import com.csv.importer.csv.file.dto.CsvFilesDto;
 import com.csv.importer.csv.file.entity.Files;
@@ -21,12 +22,12 @@ public class CsvService {
     private final CsvExtractorManager extractorManager;
     private final FilesService filesService;
     private final UserCsvWriter userCsvWriter;
-    private final UserBatchInsertRepository userBatchInsertRepository;
+    private final CsvBatchInsertRepositoryManager batchInsertRepositoryManager;
 
     @Transactional
     public CsvUploadDto extractCsv(String filename){
         CsvFilesDto csvFile = filesService.loadForCsv(filename);
-        CsvExtractResult result = extractorManager.extract(csvFile.getFiles().getType() ,csvFile.getResource());
+        CsvExtractResult result = extractorManager.extract(csvFile.getFiles().getType() ,csvFile.getResource()).orElseThrow(RuntimeException::new);
 
         String originalFileName = csvFile.getFiles().getOriginalFileName();
         int dotIdx = originalFileName.lastIndexOf('.');
@@ -41,7 +42,7 @@ public class CsvService {
         filesService.saveCsvFile(validFile, validCsv);
         filesService.saveCsvFile(invalidFile, inValidCsv);
 
-        userBatchInsertRepository.batchInsert(result.getValidRecords());
+        batchInsertRepositoryManager.batchInsert(csvFile.getFiles().getType(), result.getValidRecords());
 
         return CsvUploadDto.from(validFile, invalidFile, result);
     }

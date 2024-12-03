@@ -1,5 +1,7 @@
 package com.csv.importer.user.repository;
 
+import com.csv.importer.csv.repository.CsvBatchInsertRepository;
+import com.csv.importer.csv.type.CsvEntityType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,7 +14,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Repository
-public class UserBatchInsertRepository {
+public class UserBatchInsertRepository implements CsvBatchInsertRepository {
     private final JdbcTemplate jdbcTemplate;
 
     private final String BATCH_INSERT = "INSERT INTO users (name, email, age) VALUES (?,?,?)";
@@ -33,5 +35,10 @@ public class UserBatchInsertRepository {
                 return rows.size();
             }
         });
+    }
+
+    @Override
+    public boolean isSupport(CsvEntityType type) {
+        return type == CsvEntityType.User;
     }
 }
