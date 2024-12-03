@@ -7,10 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserCsvExtractor extends AbstractCsvExtractor {
 
-    public UserCsvExtractor(CsvParser parser){
-        super(parser);
-    }
-
     @Override
     public boolean isValid(String[] row) {
         if(!isBlank(row[0])){
