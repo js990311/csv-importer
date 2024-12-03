@@ -8,6 +8,7 @@ import com.csv.importer.file.dto.CsvFilesDto;
 import com.csv.importer.file.dto.ResourceDto;
 import com.csv.importer.file.entity.Files;
 import com.csv.importer.file.service.FilesService;
+import com.csv.importer.user.repository.UserBatchInsertRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class CsvService {
     private final UserCsvExtractor userCsvExtractor;
     private final FilesService filesService;
     private final UserCsvWriter userCsvWriter;
+    private final UserBatchInsertRepository userBatchInsertRepository;
 
     @Transactional
     public CsvUploadDto extractCsv(String filename){
@@ -38,6 +40,8 @@ public class CsvService {
 
         filesService.saveCsvFile(validFile, validCsv);
         filesService.saveCsvFile(invalidFile, inValidCsv);
+
+        userBatchInsertRepository.batchInsert(result.getValidRecords());
 
         return CsvUploadDto.from(validFile, invalidFile, result);
     }

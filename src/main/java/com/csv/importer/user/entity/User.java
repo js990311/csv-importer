@@ -7,7 +7,7 @@ import lombok.Getter;
 @Entity
 @Table(name = "users")
 public class User {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
