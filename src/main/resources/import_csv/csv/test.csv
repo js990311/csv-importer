@@ -1,0 +1,9 @@
+name,email,age, 한글
+John Doe,johndoe@example.com,25,한글
+Jane Smith,janesmith@example.com,30,한글
+Alice Brown,alice.brown@example.com,22,한글
+Bob Johnson,bobjohnson@example.com,40,한글
+Emily Davis,emily.davis@example.com,28,한글
+,fail1@example.com,21,한글
+Fail2, fail2, 22,한글
+Fail3, fail3@example.com, 23X,한글
