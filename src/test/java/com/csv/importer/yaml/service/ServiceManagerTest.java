@@ -18,7 +18,7 @@ class ServiceManagerTest {
         fileSystemAccessObject = new LocalFileSystemAccessObject();
         yamlLoader = new YamlLoader(fileSystemAccessObject);
         importQueryBuilder = new ImportQueryBuilder();
-        serviceManager = new ServiceManager(importQueryBuilder, yamlLoader);
+        serviceManager = new ServiceManager(importQueryBuilder, yamlLoader, fileSystemAccessObject);
     }
 
     @Test

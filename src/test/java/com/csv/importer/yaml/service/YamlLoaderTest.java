@@ -39,9 +39,9 @@ class YamlLoaderTest {
         assertEquals("age", work.getColumns().get(2).getName());
 
         Database database = root.getDatabase();
-        assertEquals("jdbc:postgresql://localhost:5432/mydb", database.getHost());
-        assertEquals("postgres", database.getUsername());
-        assertEquals("1234", database.getPassword());
+        assertEquals("jdbc:postgresql://localhost:5432/mydatabase", database.getHost());
+        assertEquals("myuser", database.getUsername());
+        assertEquals("secret", database.getPassword());
         assertEquals("org.postgresql.Driver", database.getDriver());
 
 

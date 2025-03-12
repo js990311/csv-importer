@@ -12,4 +12,5 @@ public class Column {
     private String name;
     private String type;
     private Integer csvIndex;
+    private String validationType;
 }
