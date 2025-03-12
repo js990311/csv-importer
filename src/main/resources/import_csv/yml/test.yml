@@ -14,3 +14,9 @@ works:
         - name: "test_korean"
           csvIndex: 3
           type: STRING
+
+database:
+  host: "jdbc:postgresql://localhost:5432/mydb"
+  username: "postgres"
+  password: "1234"
+  driver: "org.postgresql.Driver"

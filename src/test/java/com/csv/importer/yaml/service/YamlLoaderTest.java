@@ -1,6 +1,7 @@
 package com.csv.importer.yaml.service;
 
 import com.csv.importer.csv.file.access.impl.LocalFileSystemAccessObject;
+import com.csv.importer.yaml.dto.Database;
 import com.csv.importer.yaml.dto.Root;
 import com.csv.importer.yaml.dto.Work;
 import com.csv.importer.yaml.dto.Works;
@@ -36,5 +37,13 @@ class YamlLoaderTest {
         assertEquals("LONG", work.getColumns().get(0).getType());
         assertEquals(1, work.getColumns().get(1).getCsvIndex());
         assertEquals("age", work.getColumns().get(2).getName());
+
+        Database database = root.getDatabase();
+        assertEquals("jdbc:postgresql://localhost:5432/mydb", database.getHost());
+        assertEquals("postgres", database.getUsername());
+        assertEquals("1234", database.getPassword());
+        assertEquals("org.postgresql.Driver", database.getDriver());
+
+
     }
 }

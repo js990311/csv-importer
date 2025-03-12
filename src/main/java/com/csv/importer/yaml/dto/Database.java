@@ -5,9 +5,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @NoArgsConstructor
-@Setter
 @Getter
-public class Root {
-    private Works works;
-    private Database database;
+@Setter
+public class Database {
+    private String host;
+    private String username;
+    private String password;
+    private String driver;
 }
