@@ -39,6 +39,7 @@ public class ValidationManager {
                             type = column.getValidationType();
                         }
                         objects[idx] = extract(row[column.getCsvIndex()], type);
+                        idx++;
                     }
                     ret.addValidRecords(objects);
                 }catch (CsvInValidationException ex){

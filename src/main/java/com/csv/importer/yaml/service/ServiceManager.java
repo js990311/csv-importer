@@ -1,28 +1,36 @@
 package com.csv.importer.yaml.service;
 
 import com.csv.importer.csv.file.access.FileSystemAccessObject;
+import com.csv.importer.yaml.dto.Column;
 import com.csv.importer.yaml.dto.Database;
 import com.csv.importer.yaml.dto.Root;
 import com.csv.importer.yaml.dto.Work;
+import com.csv.importer.yaml.service.insert.BatchInsertService;
+import com.csv.importer.yaml.service.validation.DataResult;
+import com.csv.importer.yaml.service.validation.ValidationManager;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.List;
 
+@RequiredArgsConstructor
 @Component
 public class ServiceManager {
     private final ImportQueryBuilder importQueryBuilder;
     private final YamlLoader yamlLoader;
     private final FileSystemAccessObject fileSAO;
+    private final ValidationManager validationManager;
+    private final BatchInsertService batchInsertServicea;
 
-    public ServiceManager(ImportQueryBuilder importQueryBuilder, YamlLoader yamlLoader, FileSystemAccessObject fileSAO) {
-        this.importQueryBuilder = importQueryBuilder;
-        this.yamlLoader = yamlLoader;
-        this.fileSAO = fileSAO;
-    }
 
     public JdbcTemplate createJdbcTemplate(Database database){
         HikariConfig config = new HikariConfig();
@@ -36,12 +44,17 @@ public class ServiceManager {
         return new JdbcTemplate(dataSource);
     }
 
+    @Transactional
     public void execute(String configPath, String csvPath){
         Root config = yamlLoader.loadYaml(configPath);
         JdbcTemplate jdbcTemplate = createJdbcTemplate(config.getDatabase());
-        fileSAO.load(csvPath);
+        Resource resource = fileSAO.load(csvPath);
         for(Work work: config.getWorks().getWork()){
-            String importSql = importQueryBuilder.importSql(work);
+            String insertQuery = importQueryBuilder.importSql(work);
+            List<Column> columns = work.getColumns();
+            DataResult dataResult = validationManager.extractCsv(columns, resource);
+            List<Object[]> validRecords = dataResult.getValidRecords();
+            batchInsertServicea.batchInsert(jdbcTemplate, insertQuery, validRecords, columns);
         }
     }
 }
