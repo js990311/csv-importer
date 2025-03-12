@@ -15,8 +15,9 @@ works:
           csvIndex: 3
           type: STRING
 
+
 database:
-  host: "jdbc:postgresql://localhost:5432/mydb"
-  username: "postgres"
-  password: "1234"
+  host: "jdbc:postgresql://localhost:5432/mydatabase"
+  username: "myuser"
+  password: "secret"
   driver: "org.postgresql.Driver"

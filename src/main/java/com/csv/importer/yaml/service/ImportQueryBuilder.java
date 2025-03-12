@@ -2,7 +2,9 @@ package com.csv.importer.yaml.service;
 
 import com.csv.importer.yaml.dto.Column;
 import com.csv.importer.yaml.dto.Work;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ImportQueryBuilder {
     public String importSql(Work work){
         StringBuilder sb = new StringBuilder();
