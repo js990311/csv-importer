@@ -50,11 +50,18 @@ public class ServiceManager {
         JdbcTemplate jdbcTemplate = createJdbcTemplate(config.getDatabase());
         Resource resource = fileSAO.load(csvPath);
         for(Work work: config.getWorks().getWork()){
+            // insert Query 작성
             String insertQuery = importQueryBuilder.importSql(work);
+
+            // 데이터 추출
             List<Column> columns = work.getColumns();
             DataResult dataResult = validationManager.extractCsv(columns, resource);
+
+            // 데이터 삽입
             List<Object[]> validRecords = dataResult.getValidRecords();
             batchInsertServicea.batchInsert(jdbcTemplate, insertQuery, validRecords, columns);
+
+            // TODO InvalidRecord 작성 후 기록 남기기
         }
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Component
@@ -28,7 +29,7 @@ public class ValidationManager {
     public DataResult extractCsv(List<Column> columns, Resource resource){
         CsvParser parser = getCsvParser();
         DataResult ret = new DataResult();
-        try(BufferedReader reader = new BufferedReader(new InputStreamReader(resource.getInputStream()))){
+        try(BufferedReader reader = new BufferedReader(new InputStreamReader(resource.getInputStream(), StandardCharsets.UTF_8))){
             for(String[] row : parser.iterate(reader)){
                 try { // 현재 행이 추출되고 있는가?
                     int idx = 0;
