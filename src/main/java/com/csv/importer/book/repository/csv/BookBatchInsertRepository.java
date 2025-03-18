@@ -43,3 +43,4 @@ public class BookBatchInsertRepository implements CsvBatchInsertRepository {
         return type == CsvEntityType.Book;
     }
 }
+
