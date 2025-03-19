@@ -44,3 +44,16 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+task runCsvLoad(type: JavaExec) {
+	group = "application"
+	description = "Run the CsvLoad application as a CLI (no web server)."
+
+	mainClass = "com.csv.importer.ImporterApplication"
+
+	// CP 설정
+	classpath = sourceSets.main.runtimeClasspath
+
+	args "test.yml", "test.csv"
+	args "--spring.main.web-application-type=NONE"
+}
