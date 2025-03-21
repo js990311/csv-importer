@@ -45,7 +45,7 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-task runCsvLoad(type: JavaExec) {
+task loadCsv(type: JavaExec) {
 	group = "application"
 	description = "Run the CsvLoad application as a CLI (no web server)."
 
