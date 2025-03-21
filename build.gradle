@@ -56,4 +56,5 @@ task loadCsv(type: JavaExec) {
 
 	args "test.yml", "test.csv"
 	args "--spring.main.web-application-type=NONE"
+	args "--spring.profiles.active=loadcsv"
 }

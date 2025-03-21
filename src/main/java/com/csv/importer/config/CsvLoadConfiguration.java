@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+@Profile("loadcsv")
 @Configuration
 public class CsvLoadConfiguration extends AbstractCsvLoadConfiguration {
 
