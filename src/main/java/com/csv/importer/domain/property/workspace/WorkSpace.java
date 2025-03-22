@@ -1,10 +1,13 @@
 package com.csv.importer.domain.property.workspace;
 
+import com.csv.importer.domain.property.work.Work;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Getter
 @Builder
@@ -34,5 +37,10 @@ public class WorkSpace {
 
     @Column
     private String driver;
+
+
+    /* 관계 - Work */
+    @OneToMany(mappedBy = "workSpace")
+    private List<Work> works;
 
 }
