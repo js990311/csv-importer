@@ -41,6 +41,7 @@ public class WorkSpace {
 
 
     /* 관계 - Work */
+    @Builder.Default
     @OneToMany(mappedBy = "workSpace")
     private List<Work> works = new ArrayList<>();
 

@@ -36,7 +36,7 @@ public class Work {
     private Long workSpaceId;
 
     /* 관계 : WorkColumn */
-
+    @Builder.Default
     @OneToMany(mappedBy = "work")
     private List<WorkColumn> columns = new ArrayList<>();
 

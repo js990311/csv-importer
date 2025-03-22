@@ -36,8 +36,6 @@ public class WorkSpaceService {
                 .password(form.getPassword())
                 .build();
         workSpace = workSpaceRepository.save(workSpace);
-
-        List<Work> works = new ArrayList<>();
         if(form.getWorks() != null){
             for(WorkForm workForm : form.getWorks()){
                 Work work = Work.builder()
