@@ -1,12 +1,13 @@
 package com.csv.importer.domain.property.workspace;
 
-import com.csv.importer.domain.property.work.Work;
+import com.csv.importer.domain.property.workspace.work.Work;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -41,6 +42,10 @@ public class WorkSpace {
 
     /* 관계 - Work */
     @OneToMany(mappedBy = "workSpace")
-    private List<Work> works;
+    private List<Work> works = new ArrayList<>();
+
+    public void addWork(Work work){
+        works.add(work);
+    }
 
 }

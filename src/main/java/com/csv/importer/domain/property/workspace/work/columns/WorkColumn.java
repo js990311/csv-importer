@@ -1,6 +1,6 @@
-package com.csv.importer.domain.property.work.columns;
+package com.csv.importer.domain.property.workspace.work.columns;
 
-import com.csv.importer.domain.property.work.Work;
+import com.csv.importer.domain.property.workspace.work.Work;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

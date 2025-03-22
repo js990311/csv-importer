@@ -1,6 +1,6 @@
-package com.csv.importer.domain.property.work;
+package com.csv.importer.domain.property.workspace.work;
 
-import com.csv.importer.domain.property.work.columns.WorkColumn;
+import com.csv.importer.domain.property.workspace.work.columns.WorkColumn;
 import com.csv.importer.domain.property.workspace.WorkSpace;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -37,5 +38,9 @@ public class Work {
     /* 관계 : WorkColumn */
 
     @OneToMany(mappedBy = "work")
-    private List<WorkColumn> columns;
+    private List<WorkColumn> columns = new ArrayList<>();
+
+    public void addWorkColumn(WorkColumn column){
+        columns.add(column);
+    }
 }
