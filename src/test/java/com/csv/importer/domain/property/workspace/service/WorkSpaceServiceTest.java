@@ -5,6 +5,8 @@ import com.csv.importer.domain.property.controller.form.WorkColumnForm;
 import com.csv.importer.domain.property.controller.form.WorkForm;
 import com.csv.importer.domain.property.workspace.dto.WorkSpaceDto;
 import com.csv.importer.domain.property.controller.form.WorkSpaceForm;
+import com.csv.importer.domain.property.workspace.dto.WorkSpaceWithWorksDto;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,6 +14,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,9 +23,9 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class WorkSpaceServiceTest {
     @Autowired private WorkSpaceService workSpaceService;
-
-    @Test
-    void create() {
+    private WorkSpaceForm sampleForm;
+    @BeforeEach
+    void setUp() {
         WorkColumnForm usernameColumnForm = WorkColumnForm.builder()
                 .name("username")
                 .type("String")
@@ -42,7 +45,7 @@ class WorkSpaceServiceTest {
                 .columns(List.of(usernameColumnForm, ageColumnForm))
                 .build();
 
-        WorkSpaceForm workSpaceForm = WorkSpaceForm.builder()
+        sampleForm = WorkSpaceForm.builder()
                 .name("Form Workspace")
                 .databaseUrl("jdbc:h2:mem:testdb")
                 .username("username")
@@ -50,8 +53,42 @@ class WorkSpaceServiceTest {
                 .driver("org.h2.Driver")
                 .works(List.of(workForm))
                 .build();
+    }
 
-        WorkSpaceDto workSpaceDto = workSpaceService.create(workSpaceForm);
+
+        @Test
+    void create() {
+
+        WorkSpaceDto workSpaceDto = workSpaceService.create(sampleForm);
         assertNotNull(workSpaceDto);
     }
+
+
+    @Test
+    void testReadWorkspaceWithWorks() {
+        // Given
+        WorkSpaceDto created = workSpaceService.create(sampleForm);
+
+        // When
+        WorkSpaceWithWorksDto result = workSpaceService.readWorkspaceWithWorks(created.getId());
+
+        // Then
+        assertNotNull(result);
+        assertEquals("Form Workspace", result.getWorkSpace().getName());
+        assertEquals(1, result.getWorks().size());
+        assertEquals("users", result.getWorks().getFirst().getWork().getTableName());
+        assertEquals(2, result.getWorks().getFirst().getColumns().size());
+    }
+
+    @Test
+    void testReadWorkspaceWithWorksThrowsException() {
+        // Given
+        Long invalidId = 9999L;
+
+        // Expect
+        assertThrows(NoSuchElementException.class, () -> {
+            workSpaceService.readWorkspaceWithWorks(invalidId);
+        });
+    }
+
 }

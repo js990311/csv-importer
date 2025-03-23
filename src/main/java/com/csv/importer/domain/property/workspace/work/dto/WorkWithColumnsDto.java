@@ -12,11 +12,11 @@ import java.util.stream.Collectors;
 @Getter
 public class WorkWithColumnsDto {
     private WorkDto work;
-    private List<WorkColumnsDto> columnsDtos;
+    private List<WorkColumnsDto> columns;
 
-    public WorkWithColumnsDto(WorkDto work, List<WorkColumnsDto> columnsDtos) {
+    public WorkWithColumnsDto(WorkDto work, List<WorkColumnsDto> columns) {
         this.work = work;
-        this.columnsDtos = columnsDtos;
+        this.columns = columns;
     }
 
     /**
