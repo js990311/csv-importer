@@ -1,7 +1,8 @@
-package com.csv.importer.domain.file.service;
+package com.csv.importer.domain.file.service.util;
 
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -14,6 +15,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.NoSuchElementException;
 
+@Component
 public class MultipartFileLocalSystemAccessObject implements MultipartFileSystemAccessObject {
     private static String ROOT = "files/";
 

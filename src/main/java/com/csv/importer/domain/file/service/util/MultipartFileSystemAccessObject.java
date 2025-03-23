@@ -1,4 +1,4 @@
-package com.csv.importer.domain.file.service;
+package com.csv.importer.domain.file.service.util;
 
 import com.rejs.csvloader.file.FileSystemAccessObject;
 import org.springframework.web.multipart.MultipartFile;
