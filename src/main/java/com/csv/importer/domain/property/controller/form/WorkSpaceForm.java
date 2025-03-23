@@ -1,7 +1,5 @@
-package com.csv.importer.domain.property.workspace.dto;
+package com.csv.importer.domain.property.controller.form;
 
-import com.csv.importer.domain.property.workspace.work.Work;
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

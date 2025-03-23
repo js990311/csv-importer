@@ -1,10 +1,10 @@
 package com.csv.importer.domain.property.workspace.service;
 
 import com.csv.importer.TestcontainersConfiguration;
-import com.csv.importer.domain.property.workspace.dto.WorkColumnForm;
-import com.csv.importer.domain.property.workspace.dto.WorkForm;
+import com.csv.importer.domain.property.controller.form.WorkColumnForm;
+import com.csv.importer.domain.property.controller.form.WorkForm;
 import com.csv.importer.domain.property.workspace.dto.WorkSpaceDto;
-import com.csv.importer.domain.property.workspace.dto.WorkSpaceForm;
+import com.csv.importer.domain.property.controller.form.WorkSpaceForm;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

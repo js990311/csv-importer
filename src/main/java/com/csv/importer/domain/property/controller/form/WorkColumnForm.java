@@ -1,4 +1,4 @@
-package com.csv.importer.domain.property.workspace.dto;
+package com.csv.importer.domain.property.controller.form;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

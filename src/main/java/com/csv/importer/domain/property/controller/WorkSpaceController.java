@@ -1,8 +1,7 @@
-package com.csv.importer.domain.property.workspace.controller;
+package com.csv.importer.domain.property.controller;
 
 import com.csv.importer.domain.property.workspace.dto.WorkSpaceDto;
-import com.csv.importer.domain.property.workspace.dto.WorkSpaceForm;
-import com.csv.importer.domain.property.workspace.repository.WorkSpaceRepository;
+import com.csv.importer.domain.property.controller.form.WorkSpaceForm;
 import com.csv.importer.domain.property.workspace.service.WorkSpaceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

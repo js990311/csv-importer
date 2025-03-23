@@ -1,10 +1,11 @@
 package com.csv.importer.domain.property.workspace.service;
 
 import com.csv.importer.domain.property.workspace.WorkSpace;
-import com.csv.importer.domain.property.workspace.dto.WorkColumnForm;
-import com.csv.importer.domain.property.workspace.dto.WorkForm;
+import com.csv.importer.domain.property.controller.form.WorkColumnForm;
+import com.csv.importer.domain.property.controller.form.WorkForm;
 import com.csv.importer.domain.property.workspace.dto.WorkSpaceDto;
-import com.csv.importer.domain.property.workspace.dto.WorkSpaceForm;
+import com.csv.importer.domain.property.controller.form.WorkSpaceForm;
+import com.csv.importer.domain.property.workspace.dto.WorkSpaceWithWorksDto;
 import com.csv.importer.domain.property.workspace.repository.WorkSpaceRepository;
 import com.csv.importer.domain.property.workspace.work.Work;
 import com.csv.importer.domain.property.workspace.work.columns.WorkColumn;
@@ -14,8 +15,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -66,5 +67,15 @@ public class WorkSpaceService {
             }
         }
         return WorkSpaceDto.of(workSpace);
+    }
+
+    /* Read */
+    public WorkSpaceWithWorksDto readWorkspaceWithWorks(Long workSpaceId){
+        List<Work> worksWithWorkSpace = workRepository.findWorkWithWorkSpace(workSpaceId);
+        if(worksWithWorkSpace.isEmpty()){
+           throw new NoSuchElementException(); 
+        }
+        WorkSpace workSpace = worksWithWorkSpace.getFirst().getWorkSpace();
+        return WorkSpaceWithWorksDto.of(workSpace, worksWithWorkSpace);
     }
 }
