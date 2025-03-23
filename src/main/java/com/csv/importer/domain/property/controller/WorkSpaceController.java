@@ -2,6 +2,7 @@ package com.csv.importer.domain.property.controller;
 
 import com.csv.importer.domain.property.workspace.dto.WorkSpaceDto;
 import com.csv.importer.domain.property.controller.form.WorkSpaceForm;
+import com.csv.importer.domain.property.workspace.dto.WorkSpaceWithWorksDto;
 import com.csv.importer.domain.property.workspace.service.WorkSpaceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -15,5 +16,10 @@ public class WorkSpaceController {
     @PostMapping
     public WorkSpaceDto createWorkSpace(@RequestBody WorkSpaceForm form){
         return workSpaceService.create(form);
+    }
+
+    @GetMapping("/{id}")
+    public WorkSpaceWithWorksDto readWorkSpace(@RequestParam("id") Long id){
+        return workSpaceService.readWorkspaceWithWorks(id);
     }
 }
