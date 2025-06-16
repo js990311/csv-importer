@@ -1,10 +1,12 @@
 package com.csv.importer.domain.csvfile.entity;
 
+import com.csv.importer.domain.workspace.entity.Workspace;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -24,6 +26,17 @@ public class CsvFile {
 
     @Column
     private LocalDateTime uploadTime;
+
+    /* 관계 - Workspace */
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Workspace workspace;
+
+    public void mapWorkspace(Workspace workspace){
+        this.workspace = workspace;
+        workspace.addCsvFiles(this);
+    }
+
+    /* 생성 */
 
     public CsvFile(String originalFileName, String storedFileName) {
         this.originalFileName = originalFileName;
