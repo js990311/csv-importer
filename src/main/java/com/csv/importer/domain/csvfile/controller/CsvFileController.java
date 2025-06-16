@@ -18,12 +18,12 @@ public class CsvFileController {
     private final CsvFileService csvFileService;
 
     @GetMapping("/workspace/{workspaceId}/datas")
-    public List<CsvFileDto> getWorks(@PathVariable("workspaceId") long workspaceId){
+    public List<CsvFileDto> getDatas(@PathVariable("workspaceId") long workspaceId){
         return csvFileService.readByWorkspaceId(workspaceId);
     }
 
     @PostMapping("/workspace/{workspaceId}/datas")
-    public ResponseEntity<CsvFileDto> postWorkfile(@PathVariable("workspaceId") long workspaceId, @RequestParam("file") MultipartFile file){
+    public ResponseEntity<CsvFileDto> postData(@PathVariable("workspaceId") long workspaceId, @RequestParam("file") MultipartFile file){
         CsvFileDto csvFile = csvFileService.createCsvFile(workspaceId, file);
         URI location = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/datas/{id}")
@@ -33,7 +33,7 @@ public class CsvFileController {
     }
 
     @GetMapping("/datas/{dataId}")
-    public CsvFileDto getWorkfile(@PathVariable("dataId") long dataId){
+    public CsvFileDto getData(@PathVariable("dataId") long dataId){
         return csvFileService.readById(dataId);
     }
 
