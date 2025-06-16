@@ -7,17 +7,19 @@ import java.time.LocalDateTime;
 
 @Getter
 public class WorkFileDto {
+    private Long id;
     private String originalFileName;
     private String storedFileName;
     private LocalDateTime uploadTime;
 
-    public WorkFileDto(String originalFileName, String storedFileName, LocalDateTime uploadTime) {
+    public WorkFileDto(Long id, String originalFileName, String storedFileName, LocalDateTime uploadTime) {
+        this.id = id;
         this.originalFileName = originalFileName;
         this.storedFileName = storedFileName;
         this.uploadTime = uploadTime;
     }
 
     public static WorkFileDto of(WorkFile workFile){
-        return new WorkFileDto(workFile.getOriginalFileName(), workFile.getStoredFileName(), workFile.getUploadTime());
+        return new WorkFileDto(workFile.getId(), workFile.getOriginalFileName(), workFile.getStoredFileName(), workFile.getUploadTime());
     }
 }

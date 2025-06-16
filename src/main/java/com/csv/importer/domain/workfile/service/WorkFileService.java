@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.UUID;
 
 @Transactional(readOnly = true)
@@ -46,8 +47,8 @@ public class WorkFileService {
         return WorkFileDto.of(workFile);
     }
 
-    public Page<WorkFileDto> findAll(int p, int s){
-        return workFileRepository.findAllBy(PageRequest.of(p,s)).map(WorkFileDto::of);
+    public List<WorkFileDto> findWorkByWorkspaceId(long workspaceId){
+        return workFileRepository.findWorkByWorkspaceId(workspaceId).stream().map(WorkFileDto::of).toList();
     }
 
     // UPDATE
