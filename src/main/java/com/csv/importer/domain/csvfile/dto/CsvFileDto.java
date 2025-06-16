@@ -7,17 +7,19 @@ import java.time.LocalDateTime;
 
 @Getter
 public class CsvFileDto {
+    private Long id;
     private String originalFileName;
     private String storedFileName;
     private LocalDateTime uploadTime;
 
-    public CsvFileDto(String originalFileName, String storedFileName, LocalDateTime uploadTime) {
+    public CsvFileDto(Long id, String originalFileName, String storedFileName, LocalDateTime uploadTime) {
+        this.id = id;
         this.originalFileName = originalFileName;
         this.storedFileName = storedFileName;
         this.uploadTime = uploadTime;
     }
 
     public static CsvFileDto of(CsvFile csvFile){
-        return new CsvFileDto(csvFile.getOriginalFileName(), csvFile.getStoredFileName(), csvFile.getUploadTime());
+        return new CsvFileDto(csvFile.getId(), csvFile.getOriginalFileName(), csvFile.getStoredFileName(), csvFile.getUploadTime());
     }
 }

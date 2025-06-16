@@ -42,6 +42,7 @@ public class WorkFile {
 
     public void mapWorkspace(Workspace workspace){
         this.workspace = workspace;
+        this.workspaceId = workspace.getId();
         workspace.addWorkFiles(this);
     }
 

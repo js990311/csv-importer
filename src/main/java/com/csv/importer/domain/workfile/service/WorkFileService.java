@@ -36,7 +36,7 @@ public class WorkFileService {
         WorkFile workFile = new WorkFile(originalFilename, storedFileName);
         Workspace workspace = workspaceRepository.findById(workspaceId).orElseThrow();
         fileSAO.save(storedFileName, file.getResource());
-        workspace.addWorkFiles(workFile);
+        workFile.mapWorkspace(workspace);
         workFile = workFileRepository.save(workFile);
         return WorkFileDto.of(workFile);
     }

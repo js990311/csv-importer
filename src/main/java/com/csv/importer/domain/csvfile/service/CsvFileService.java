@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.UUID;
 
 @Transactional(readOnly = true)
@@ -32,5 +33,14 @@ public class CsvFileService {
         fileSAO.save(storedFileName, file);
         csvFile = csvFileRepository.save(csvFile);
         return CsvFileDto.of(csvFile);
+    }
+
+    /* Read */
+    public CsvFileDto readById(Long csvFileId){
+        return CsvFileDto.of(csvFileRepository.findById(csvFileId).orElseThrow());
+    }
+
+    public List<CsvFileDto> readByWorkspaceId(Long workspaceId){
+        return csvFileRepository.findByWorkspaceId(workspaceId).stream().map(CsvFileDto::of).toList();
     }
 }

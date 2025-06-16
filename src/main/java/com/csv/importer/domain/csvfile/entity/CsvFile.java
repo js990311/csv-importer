@@ -29,10 +29,15 @@ public class CsvFile {
 
     /* 관계 - Workspace */
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "workspace_id")
     private Workspace workspace;
+
+    @Column(name = "workspace_id", updatable = false, insertable = false)
+    private Long workspaceId;
 
     public void mapWorkspace(Workspace workspace){
         this.workspace = workspace;
+        this.workspaceId = workspace.getId();
         workspace.addCsvFiles(this);
     }
 
