@@ -7,6 +7,7 @@ import com.csv.importer.domain.workspace.entity.Workspace;
 import com.csv.importer.domain.workspace.repository.WorkspaceRepository;
 import com.csv.importer.utils.file.FileExtensionUtils;
 import com.csv.importer.utils.file.MultipartFileSystemAccessObject;
+import com.rejs.csvloader.file.FileSystemAccessObject;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +21,7 @@ import java.util.UUID;
 @Service
 public class CsvFileService {
     private final CsvFileRepository csvFileRepository;
-    private final MultipartFileSystemAccessObject fileSAO;
+    private final FileSystemAccessObject fileSAO;
     private final WorkspaceRepository workspaceRepository;
 
     /* Create */
@@ -35,7 +36,7 @@ public class CsvFileService {
         CsvFile csvFile = new CsvFile(originalFilename, storedFileName);
         Workspace workspace = workspaceRepository.findById(workspaceId).orElseThrow();
         csvFile.mapWorkspace(workspace);
-        fileSAO.save(storedFileName, file);
+        fileSAO.save(storedFileName, file.getResource());
         csvFile = csvFileRepository.save(csvFile);
         return CsvFileDto.of(csvFile);
     }

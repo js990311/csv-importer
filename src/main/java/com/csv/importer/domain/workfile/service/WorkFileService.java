@@ -24,7 +24,6 @@ import java.util.UUID;
 public class WorkFileService {
     private final WorkFileRepository workFileRepository;
 
-    @Qualifier("multipartFileLocalSystemAccessObject")
     private final FileSystemAccessObject fileSAO;
 
     private final WorkspaceRepository workspaceRepository;
