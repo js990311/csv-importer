@@ -17,9 +17,10 @@ public class WorkspaceService {
 
     /* Create */
     @Transactional
-    public void createWorkspace(String name){
+    public WorkspaceDto createWorkspace(String name){
         Workspace workspace = new Workspace(name);
-        workspaceRepository.save(workspace);
+        workspace = workspaceRepository.save(workspace);
+        return WorkspaceDto.of(workspace);
     }
 
     /* Read */
