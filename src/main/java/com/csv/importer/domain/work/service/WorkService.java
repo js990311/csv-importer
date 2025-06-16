@@ -20,8 +20,8 @@ public class WorkService {
     private final CsvLoadService csvLoadService;
     private final ImportPropertiesLoader propertiesLoader;
     private final FileSystemAccessObject fileSystemAccessObject;
-    private WorkFileService workFileService;
-    private CsvFileService csvFileService;
+    private final WorkFileService workFileService;
+    private final CsvFileService csvFileService;
 
     public void loadCsv(Long workId, Long dataId){
         WorkFileDto work = workFileService.findById(workId);
