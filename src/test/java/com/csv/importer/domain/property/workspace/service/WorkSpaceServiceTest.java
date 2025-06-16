@@ -1,6 +1,5 @@
 package com.csv.importer.domain.property.workspace.service;
 
-import com.csv.importer.TestcontainersConfiguration;
 import com.csv.importer.domain.property.controller.form.WorkColumnForm;
 import com.csv.importer.domain.property.controller.form.WorkForm;
 import com.csv.importer.domain.property.workspace.dto.WorkSpaceDto;
@@ -19,7 +18,6 @@ import java.util.NoSuchElementException;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ActiveProfiles("test")
-@Import(TestcontainersConfiguration.class)
 @SpringBootTest
 class WorkSpaceServiceTest {
     @Autowired private WorkSpaceService workSpaceService;
