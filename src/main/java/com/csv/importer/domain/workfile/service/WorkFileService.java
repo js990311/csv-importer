@@ -5,6 +5,7 @@ import com.csv.importer.domain.workfile.entity.WorkFile;
 import com.csv.importer.domain.workfile.repository.WorkFileRepository;
 import com.csv.importer.domain.workspace.entity.Workspace;
 import com.csv.importer.domain.workspace.repository.WorkspaceRepository;
+import com.csv.importer.utils.file.FileExtensionUtils;
 import com.rejs.csvloader.file.FileSystemAccessObject;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -31,8 +32,11 @@ public class WorkFileService {
     // CREATE
     @Transactional
     public WorkFileDto createWorkFile(Long workspaceId, MultipartFile file){
+        if(!FileExtensionUtils.isYamlFile(file)){
+            throw new IllegalArgumentException();
+        }
         String originalFilename = file.getOriginalFilename();
-        String storedFileName = UUID.randomUUID().toString() + ".csv";
+        String storedFileName = UUID.randomUUID().toString() + ".yml";
         WorkFile workFile = new WorkFile(originalFilename, storedFileName);
         Workspace workspace = workspaceRepository.findById(workspaceId).orElseThrow();
         fileSAO.save(storedFileName, file.getResource());
