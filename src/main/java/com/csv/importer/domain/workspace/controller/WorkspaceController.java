@@ -13,7 +13,7 @@ import java.net.URI;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(name = "/workspace")
+@RequestMapping("/workspace")
 public class WorkspaceController {
     private final WorkspaceService workspaceService;
 
@@ -25,7 +25,7 @@ public class WorkspaceController {
     public ResponseEntity<WorkspaceDto> postWorkspaceDto(@RequestBody CreateWorkspaceRequest request){
         WorkspaceDto workspace = workspaceService.createWorkspace(request.getName());
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/workspace/{id}")
+                .path("/{id}")
                 .buildAndExpand(workspace.getId())
                 .toUri();
         return ResponseEntity.created(location).body(workspace);
