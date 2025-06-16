@@ -1,6 +1,6 @@
-package com.csv.importer.domain.work.dto;
+package com.csv.importer.domain.work.file.dto;
 
-import com.csv.importer.domain.work.entity.WorkFile;
+import com.csv.importer.domain.work.file.entity.WorkFile;
 import lombok.Getter;
 
 import java.time.LocalDateTime;

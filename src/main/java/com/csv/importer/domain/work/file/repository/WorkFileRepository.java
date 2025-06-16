@@ -1,6 +1,6 @@
-package com.csv.importer.domain.work.repository;
+package com.csv.importer.domain.work.file.repository;
 
-import com.csv.importer.domain.work.entity.WorkFile;
+import com.csv.importer.domain.work.file.entity.WorkFile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
