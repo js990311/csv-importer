@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>workspace home</title>
+</head>
+<body>
+<div>
+<h1>Workspace list</h1>
+<ul>
+    <li th:each="workspace : ${workspaces}">
+        <a th:href="@{/workspaces/{id}(id=${workspace.id})}">
+            <div>
+                <h3 th:text="${workspace.name}"></h3>
+            </div>
+            <div>
+                <div><span>데이터 수 : </span><span th:text="${workspace.dataCounts}"></span></div>
+                <div><span>작업 수 : </span><span th:text="${workspace.dataCounts}"></span></div>
+            </div>
+        </a>
+    </li>
+</ul>
+</div>
+</body>
+</html>

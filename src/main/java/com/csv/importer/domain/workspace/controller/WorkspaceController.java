@@ -13,7 +13,7 @@ import java.net.URI;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/workspace")
+@RequestMapping("/api/workspaces")
 public class WorkspaceController {
     private final WorkspaceService workspaceService;
 

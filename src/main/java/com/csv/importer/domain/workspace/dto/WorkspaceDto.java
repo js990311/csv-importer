@@ -7,6 +7,15 @@ import lombok.Getter;
 public class WorkspaceDto {
     private Long id;
     private String name;
+    private int dataCounts;
+    private int workCounts;
+
+    public WorkspaceDto(Long id, String name, int dataCounts, int workCounts) {
+        this.id = id;
+        this.name = name;
+        this.dataCounts = dataCounts;
+        this.workCounts = workCounts;
+    }
 
     public WorkspaceDto(Long id, String name) {
         this.id = id;

@@ -5,6 +5,9 @@ import com.csv.importer.domain.workfile.service.WorkFileService;
 import com.csv.importer.domain.workspace.entity.Workspace;
 import com.csv.importer.domain.workspace.repository.WorkspaceRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +30,10 @@ public class WorkspaceService {
     public WorkspaceDto readById(Long id){
         Workspace workspace = workspaceRepository.findById(id).orElseThrow();
         return WorkspaceDto.of(workspace);
+    }
+
+    public Page<WorkspaceDto> readAll(int p, int s){
+        return workspaceRepository.findAllWithCounts(PageRequest.of(p,s));
     }
 
     /* Update */
