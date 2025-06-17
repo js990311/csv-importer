@@ -48,7 +48,7 @@ class WorkFileControllerTest {
                 new WorkFileDto(workFileId, originalFileName, storedFileName, uploadTime)
         ));
 
-        mockMvc.perform(get("/workspace/{id}/works", workspaceId))
+        mockMvc.perform(get("/api/workspace/{id}/works", workspaceId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].id").value(workFileId))
@@ -79,7 +79,7 @@ class WorkFileControllerTest {
                         new WorkFileDto(workFileId, originalFileName, storedFileName, uploadTime)
                 );
 
-        mockMvc.perform(multipart("/workspace/{workspaceId}/works", workspaceId)
+        mockMvc.perform(multipart("/api/workspace/{workspaceId}/works", workspaceId)
                 .file(mockFile))
                 .andExpect(status().isCreated())
                 .andExpect(header().exists("Location"))
@@ -103,7 +103,7 @@ class WorkFileControllerTest {
                 new WorkFileDto(workFileId, originalFileName, storedFileName, uploadTime)
         );
 
-        mockMvc.perform(get("/works/{id}", workFileId))
+        mockMvc.perform(get("/api/works/{id}", workFileId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(workFileId))
                 .andExpect(jsonPath("$.originalFileName").value(originalFileName))

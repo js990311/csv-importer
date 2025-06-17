@@ -17,12 +17,12 @@ import java.util.List;
 public class CsvFileController {
     private final CsvFileService csvFileService;
 
-    @GetMapping("/workspace/{workspaceId}/datas")
+    @GetMapping("/api/workspace/{workspaceId}/datas")
     public List<CsvFileDto> getDatas(@PathVariable("workspaceId") long workspaceId){
         return csvFileService.readByWorkspaceId(workspaceId);
     }
 
-    @PostMapping("/workspace/{workspaceId}/datas")
+    @PostMapping("/api/workspace/{workspaceId}/datas")
     public ResponseEntity<CsvFileDto> postData(@PathVariable("workspaceId") long workspaceId, @RequestParam("file") MultipartFile file){
         CsvFileDto csvFile = csvFileService.createCsvFile(workspaceId, file);
         URI location = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -32,7 +32,7 @@ public class CsvFileController {
         return ResponseEntity.created(location).body(csvFile);
     }
 
-    @GetMapping("/datas/{dataId}")
+    @GetMapping("/api/datas/{dataId}")
     public CsvFileDto getData(@PathVariable("dataId") long dataId){
         return csvFileService.readById(dataId);
     }

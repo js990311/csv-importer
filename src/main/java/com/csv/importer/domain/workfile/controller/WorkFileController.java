@@ -16,12 +16,12 @@ import java.util.List;
 public class WorkFileController {
     private final WorkFileService workFileService;
 
-    @GetMapping("/workspace/{workspaceId}/works")
+    @GetMapping("/api/workspace/{workspaceId}/works")
     public List<WorkFileDto> getWorks(@PathVariable("workspaceId") long workspaceId){
         return workFileService.findWorkByWorkspaceId(workspaceId);
     }
 
-    @PostMapping("/workspace/{workspaceId}/works")
+    @PostMapping("/api/workspace/{workspaceId}/works")
     public ResponseEntity<WorkFileDto> postWorkfile(@PathVariable("workspaceId") long workspaceId, @RequestParam("file") MultipartFile file){
         WorkFileDto workFile = workFileService.createWorkFile(workspaceId, file);
         URI location = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -31,7 +31,7 @@ public class WorkFileController {
         return ResponseEntity.created(location).body(workFile);
     }
 
-    @GetMapping("/works/{workId}")
+    @GetMapping("/api/works/{workId}")
     public WorkFileDto getWorkfile(@PathVariable("workId") long workId){
         return workFileService.findById(workId);
     }
