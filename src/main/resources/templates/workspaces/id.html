@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>workspace id</title>
+</head>
+<body th:data-workspace-id="${workspace.id}">
+<h1 th:text="${workspace.name}"></h1>
+<div>
+    <h3>작업들 <span th:text="${workspace.workCounts}"></span></h3>
+    <ul id="works"></ul>
+</div>
+<div>
+    <h3>데이터들 <span th:text="${workspace.workCounts}"></span></h3>
+    <ul id="datas"></ul>
+</div>
+<script type="module" th:src="@{/js/workspace-detail.js}"></script>
+</body>
+</html>

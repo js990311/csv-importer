@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -21,5 +22,12 @@ public class WorkspaceViewController {
         Page<WorkspaceDto> workspaces = workspaceService.readAll(p - 1, s);
         model.addAttribute("workspaces", workspaces);
         return "workspaces/home";
+    }
+
+    @GetMapping("/{workspaceId}")
+    public String getWorkspaceId(@PathVariable(name= "workspaceId") long workspaceId, Model model){
+        WorkspaceDto workspace = workspaceService.readById(workspaceId);
+        model.addAttribute("workspace", workspace);
+        return "/workspaces/id";
     }
 }

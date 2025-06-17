@@ -28,8 +28,7 @@ public class WorkspaceService {
 
     /* Read */
     public WorkspaceDto readById(Long id){
-        Workspace workspace = workspaceRepository.findById(id).orElseThrow();
-        return WorkspaceDto.of(workspace);
+        return workspaceRepository.findAllWithCountsById(id);
     }
 
     public Page<WorkspaceDto> readAll(int p, int s){
