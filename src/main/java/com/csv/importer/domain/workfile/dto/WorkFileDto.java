@@ -11,15 +11,17 @@ public class WorkFileDto {
     private String originalFileName;
     private String storedFileName;
     private LocalDateTime uploadTime;
+    private Long workspaceId;
 
-    public WorkFileDto(Long id, String originalFileName, String storedFileName, LocalDateTime uploadTime) {
+    public WorkFileDto(Long id, String originalFileName, String storedFileName, LocalDateTime uploadTime, Long workspaceId) {
         this.id = id;
         this.originalFileName = originalFileName;
         this.storedFileName = storedFileName;
         this.uploadTime = uploadTime;
+        this.workspaceId = workspaceId;
     }
 
     public static WorkFileDto of(WorkFile workFile){
-        return new WorkFileDto(workFile.getId(), workFile.getOriginalFileName(), workFile.getStoredFileName(), workFile.getUploadTime());
+        return new WorkFileDto(workFile.getId(), workFile.getOriginalFileName(), workFile.getStoredFileName(), workFile.getUploadTime(), workFile.getWorkspaceId());
     }
 }

@@ -41,12 +41,12 @@ class WorkspaceControllerTest {
         when(workspaceService.createWorkspace(name)).thenReturn(new WorkspaceDto(id, name));
 
         // then
-        mockMvc.perform(post("/api/workspace")
+        mockMvc.perform(post("/api/workspaces")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsBytes(new CreateWorkspaceRequest(name))))
                 .andExpect(status().isCreated())
                 .andExpect(header().exists("Location"))
-                .andExpect(header().string("Location", endsWith("/workspace/" + id)))
+                .andExpect(header().string("Location", endsWith("/workspaces/" + id)))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(id))
                 .andExpect(jsonPath("$.name").value(name))
@@ -63,7 +63,7 @@ class WorkspaceControllerTest {
         when(workspaceService.readById(id)).thenReturn(new WorkspaceDto(id, name));
 
         // then
-        mockMvc.perform(get("/api/workspace/{id}", id))
+        mockMvc.perform(get("/api/workspaces/{id}", id))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(id))

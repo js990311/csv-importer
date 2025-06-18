@@ -50,7 +50,7 @@ class CsvFileControllerTest {
                 new CsvFileDto(dataId, originalFileName, storedFileName, uploadTime)
         ));
 
-        mockMvc.perform(get("/api/workspace/{id}/datas", workspaceId))
+        mockMvc.perform(get("/api/workspaces/{id}/datas", workspaceId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].id").value(dataId))
@@ -81,7 +81,7 @@ class CsvFileControllerTest {
                 .thenReturn(
                         new CsvFileDto(dataId, originalFileName, storedFileName, uploadTime)
                 );
-        mockMvc.perform(multipart("/api/workspace/{workspaceId}/datas", workspaceId)
+        mockMvc.perform(multipart("/api/workspaces/{workspaceId}/datas", workspaceId)
                         .file(mockFile))
                 .andExpect(status().isCreated())
                 .andExpect(header().exists("Location"))
