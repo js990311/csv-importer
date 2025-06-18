@@ -11,15 +11,17 @@ public class CsvFileDto {
     private String originalFileName;
     private String storedFileName;
     private LocalDateTime uploadTime;
+    private Long workspaceId;
 
-    public CsvFileDto(Long id, String originalFileName, String storedFileName, LocalDateTime uploadTime) {
+    public CsvFileDto(Long id, String originalFileName, String storedFileName, LocalDateTime uploadTime, Long workspaceId) {
         this.id = id;
         this.originalFileName = originalFileName;
         this.storedFileName = storedFileName;
         this.uploadTime = uploadTime;
+        this.workspaceId = workspaceId;
     }
 
     public static CsvFileDto of(CsvFile csvFile){
-        return new CsvFileDto(csvFile.getId(), csvFile.getOriginalFileName(), csvFile.getStoredFileName(), csvFile.getUploadTime());
+        return new CsvFileDto(csvFile.getId(), csvFile.getOriginalFileName(), csvFile.getStoredFileName(), csvFile.getUploadTime(),csvFile.getWorkspaceId());
     }
 }

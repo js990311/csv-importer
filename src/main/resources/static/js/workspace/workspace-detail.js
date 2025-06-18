@@ -67,7 +67,7 @@ async function fetchDatas(id){
 const renderDataItem = (item) => {
     const li = document.createElement('li');
     const a = document.createElement('a');
-    a.href = `/works/${item.id}`;
+    a.href = `/datas/${item.id}`;
     a.innerText = item.originalFileName;
     const div = document.createElement('div');
     const p_storedFileName = document.createElement('p');

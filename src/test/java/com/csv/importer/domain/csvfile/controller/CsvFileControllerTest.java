@@ -47,7 +47,7 @@ class CsvFileControllerTest {
         LocalDateTime uploadTime = LocalDateTime.now();
 
         when(csvFileService.readByWorkspaceId(workspaceId)).thenReturn(List.of(
-                new CsvFileDto(dataId, originalFileName, storedFileName, uploadTime)
+                new CsvFileDto(dataId, originalFileName, storedFileName, uploadTime, 1L)
         ));
 
         mockMvc.perform(get("/api/workspaces/{id}/datas", workspaceId))
@@ -79,7 +79,7 @@ class CsvFileControllerTest {
 
         when(csvFileService.createCsvFile(workspaceId, mockFile))
                 .thenReturn(
-                        new CsvFileDto(dataId, originalFileName, storedFileName, uploadTime)
+                        new CsvFileDto(dataId, originalFileName, storedFileName, uploadTime, 1L)
                 );
         mockMvc.perform(multipart("/api/workspaces/{workspaceId}/datas", workspaceId)
                         .file(mockFile))
@@ -101,7 +101,7 @@ class CsvFileControllerTest {
         LocalDateTime uploadTime = LocalDateTime.now();
 
         when(csvFileService.readById(dataId)).thenReturn(
-                new CsvFileDto(dataId, originalFileName, storedFileName, uploadTime)
+                new CsvFileDto(dataId, originalFileName, storedFileName, uploadTime, 1L)
         );
 
         mockMvc.perform(get("/api/datas/{id}", dataId))

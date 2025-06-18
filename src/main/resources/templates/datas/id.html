@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Work</title>
+</head>
+<body>
+<h1 th:text="${data.originalFileName}"></h1>
+<a th:href="@{/download(fileName=${data.storedFileName})}" th:text="${data.storedFileName}"></a>
+<p th:text="${data.uploadTime}"></p>
+<a th:href="@{/workspaces/{workspaceId}(workspaceId=${data.workspaceId})}">workspace로 가기</a>
+</body>
+</html>

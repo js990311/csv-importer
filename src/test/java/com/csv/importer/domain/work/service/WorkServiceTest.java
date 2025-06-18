@@ -37,7 +37,7 @@ class WorkServiceTest {
         String dataStoreName = "test.csv";
 
         when(workFileService.findById(any(Long.class))).thenReturn(new WorkFileDto(null, null, propertyStoreName, null, null));
-        when(csvFileService.readById(any(Long.class))).thenReturn(new CsvFileDto(null, null, dataStoreName, null));
+        when(csvFileService.readById(any(Long.class))).thenReturn(new CsvFileDto(null, null, dataStoreName, null, null));
 
 
         workService.loadCsv(1L, 1L);
