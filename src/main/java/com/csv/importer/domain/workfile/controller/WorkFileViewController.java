@@ -3,23 +3,31 @@ package com.csv.importer.domain.workfile.controller;
 import com.csv.importer.domain.workfile.dto.WorkFileDto;
 import com.csv.importer.domain.workfile.service.WorkFileService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/works")
 public class WorkFileViewController {
     private final WorkFileService workFileService;
 
-    @GetMapping("/{workId}")
+    @GetMapping("/works/{workId}")
     public String getWorkfile(@PathVariable("workId") long workId, Model model){
         WorkFileDto work = workFileService.findById(workId);
         model.addAttribute("work", work);
         return "works/id";
+    }
+
+    @PostMapping("/workspaces/{workspaceId}/works")
+    public String postWorkfile(@PathVariable("workspaceId") long workspaceId, @RequestParam("file") MultipartFile file){
+        WorkFileDto workFile = workFileService.createWorkFile(workspaceId, file);
+        return "redirect:/works/"+workFile.getId();
     }
 
 }

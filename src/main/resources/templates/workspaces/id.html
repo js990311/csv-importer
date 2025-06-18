@@ -8,10 +8,21 @@
 <h1 th:text="${workspace.name}"></h1>
 <div>
     <h3>작업들 <span th:text="${workspace.workCounts}"></span></h3>
+    <form th:action="@{/workspaces/{workspaceId}/works(workspaceId=${workspace.id})}" method="post" enctype="multipart/form-data">
+        <label for="workFile">파일제출(yaml만)</label>
+        <input type="file" name="file" id="workFile">
+        <button type="submit">제출하기</button>
+    </form>
     <ul id="works"></ul>
 </div>
 <div>
     <h3>데이터들 <span th:text="${workspace.workCounts}"></span></h3>
+    <form th:action="@{/workspaces/{workspaceId}/datas(workspaceId=${workspace.id})}" method="post" enctype="multipart/form-data">
+        <label for="csvFile">파일제출(CSV만)</label>
+        <input type="file" name="file" id="csvFile">
+        <button type="submit">제출하기</button>
+    </form>
+
     <ul id="datas"></ul>
 </div>
 <script type="module" th:src="@{/js/workspace/workspace-detail.js}"></script>

@@ -6,20 +6,24 @@ import com.csv.importer.domain.workfile.dto.WorkFileDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/datas")
 public class CsvFileViewController {
     private final CsvFileService csvFileService;
-    @GetMapping("/{dataId}")
+    @GetMapping("/datas/{dataId}")
     public String getData(@PathVariable("dataId") long dataId, Model model){
         CsvFileDto data = csvFileService.readById(dataId);
         model.addAttribute("data", data);
         return "datas/id";
+    }
+
+    @PostMapping("/workspaces/{workspaceId}/datas")
+    public String postCsvfile(@PathVariable("workspaceId") long workspaceId, @RequestParam("file") MultipartFile file){
+        CsvFileDto csvFile = csvFileService.createCsvFile(workspaceId, file);
+        return "redirect:/datas/"+csvFile.getId();
     }
 
 }
