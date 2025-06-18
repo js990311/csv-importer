@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CreateWorkSpace</title>
+</head>
+<body>
+<h1>Create Workspace</h1>
+<form th:action="@{/workspaces/create}" method="post" th:object="${form}">
+    <label for="name"></label>
+    <input type="text" th:field="*{name}">
+    <button type="submit">제출하기</button>
+</form>
+</body>
+</html>
