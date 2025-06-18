@@ -6,7 +6,8 @@
 </head>
 <body>
 <h1 th:text="${work.originalFileName}"></h1>
-<a th:href="@{/download(fileName=${fileName})}" th:text="${work.storedFileName}"></a>
+<a th:href="@{/download(fileName=${work.storedFileName})}" th:text="${work.storedFileName}"></a>
 <p th:text="${work.uploadTime}"></p>
+<a th:href="@{/workspaces/{workspaceId}(workspaceId=${work.workspaceId})}">workspace로 가기</a>
 </body>
 </html>
