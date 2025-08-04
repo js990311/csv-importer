@@ -10,5 +10,6 @@
 <a th:href="@{/download(fileName=${work.storedFileName})}" th:text="${work.storedFileName}"></a>
 <p th:text="${work.uploadTime}"></p>
 <a th:href="@{/workspaces/{workspaceId}(workspaceId=${work.workspaceId})}">workspace로 가기</a>
+<script th:src="@{/js/htmx.min.js}"></script>
 </body>
 </html>

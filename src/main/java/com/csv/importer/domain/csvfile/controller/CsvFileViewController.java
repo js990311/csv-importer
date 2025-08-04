@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class CsvFileViewController {
@@ -24,6 +26,13 @@ public class CsvFileViewController {
     public String postCsvfile(@PathVariable("workspaceId") long workspaceId, @RequestParam("file") MultipartFile file){
         CsvFileDto csvFile = csvFileService.createCsvFile(workspaceId, file);
         return "redirect:/datas/"+csvFile.getId();
+    }
+
+    @GetMapping("/workspaces/{workspaceId}/datas")
+    public String getDatas(@PathVariable("workspaceId") long workspaceId, Model model){
+        List<CsvFileDto> datas = csvFileService.readByWorkspaceId(workspaceId);
+        model.addAttribute("datas", datas);
+        return "datas/fragments::dataListFragment";
     }
 
 }

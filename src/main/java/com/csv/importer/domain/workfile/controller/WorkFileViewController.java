@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
@@ -22,6 +23,13 @@ public class WorkFileViewController {
         WorkFileDto work = workFileService.findById(workId);
         model.addAttribute("work", work);
         return "works/id";
+    }
+
+    @GetMapping("/workspaces/{workspaceId}/works")
+    public String getWorks(@PathVariable("workspaceId") long workspaceId, Model model){
+        List<WorkFileDto> works = workFileService.findWorkByWorkspaceId(workspaceId);
+        model.addAttribute("works", works);
+        return "works/fragments::workListFragment";
     }
 
     @PostMapping("/workspaces/{workspaceId}/works")

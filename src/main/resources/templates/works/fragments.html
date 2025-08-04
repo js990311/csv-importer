@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<th:block th:fragment="workListFragment">
+    <li th:if=${#lists.isEmpty(works)}>EMPTY</li>
+    <li th:each="work : ${works}">
+        <a th:href="@{/works/{id}(id=${work.id})}">
+            <span th:text="${work.originalFileName}"></span>
+            <div>
+                <p th:text="${work.storedFileName}"></p>
+                <p th:text="${work.uploadTime}"></p>
+            </div>
+        </a>
+    </li>
+</th:block>
+
+</body>
+</html>

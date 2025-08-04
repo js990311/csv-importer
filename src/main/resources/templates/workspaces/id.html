@@ -14,7 +14,11 @@
         <input type="file" name="file" id="workFile">
         <button type="submit">제출하기</button>
     </form>
-    <ul id="works"></ul>
+    <ul id="works"
+        th:hx-get="@{/workspaces/{id}/works(id=${workspaceId})}"
+        hx-trigger="load"
+        hx-swap="innerHtml"
+    ></ul>
 </div>
 <div>
     <h3>데이터들 <span th:text="${workspace.workCounts}"></span></h3>
@@ -24,8 +28,12 @@
         <button type="submit">제출하기</button>
     </form>
 
-    <ul id="datas"></ul>
+    <ul id="datas"
+        th:hx-get="@{/workspaces/{id}/datas(id=${workspaceId})}"
+        hx-trigger="load"
+        hx-swap="innerHtml"
+    ></ul>
 </div>
-<script type="module" th:src="@{/js/workspace/workspace-detail.js}"></script>
+<script th:src="@{/js/htmx.min.js}"></script>
 </body>
 </html>
