@@ -1,12 +1,12 @@
 package com.csv.importer.domain.csvfile.entity;
 
+import com.csv.importer.domain.workfile.entity.WorkFile;
 import com.csv.importer.domain.workspace.entity.Workspace;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @NoArgsConstructor

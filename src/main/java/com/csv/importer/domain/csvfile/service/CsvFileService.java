@@ -4,9 +4,11 @@ import com.csv.importer.domain.csvfile.entity.CsvFile;
 import com.csv.importer.domain.csvfile.dto.CsvFileDto;
 import com.csv.importer.domain.csvfile.repository.CsvFileRepository;
 import com.csv.importer.domain.workfile.dto.WorkFileDto;
+import com.csv.importer.domain.workfile.entity.WorkFile;
 import com.csv.importer.domain.workspace.entity.Workspace;
 import com.csv.importer.domain.workspace.repository.WorkspaceRepository;
 import com.csv.importer.utils.file.FileExtensionUtils;
+import com.csv.importer.utils.file.FilePreviewService;
 import com.rejs.csvloader.file.FileSystemAccessObject;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,7 @@ public class CsvFileService {
     private final CsvFileRepository csvFileRepository;
     private final FileSystemAccessObject fileSAO;
     private final WorkspaceRepository workspaceRepository;
+    private final FilePreviewService filePreviewService;
 
     /* Create */
     @Transactional
@@ -48,5 +51,10 @@ public class CsvFileService {
 
     public List<CsvFileDto> readByWorkspaceId(Long workspaceId){
         return csvFileRepository.findByWorkspaceId(workspaceId).stream().map(CsvFileDto::of).toList();
+    }
+
+    public String previewDataFile(long dataId) {
+        CsvFile csvFile = csvFileRepository.findById(dataId).orElseThrow();
+        return filePreviewService.previewFile(csvFile.getStoredFileName());
     }
 }

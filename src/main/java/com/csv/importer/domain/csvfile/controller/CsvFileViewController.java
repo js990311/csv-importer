@@ -22,6 +22,13 @@ public class CsvFileViewController {
         return "datas/id";
     }
 
+    @GetMapping("/datas/{dataId}/preview")
+    public String getDatafilePreview(@PathVariable("dataId") long dataId, Model model){
+        String previewContent = csvFileService.previewDataFile(dataId);
+        model.addAttribute("preview", previewContent);
+        return "fragments::filePreview";
+    }
+
     @PostMapping("/workspaces/{workspaceId}/datas")
     public String postCsvfile(@PathVariable("workspaceId") long workspaceId, @RequestParam("file") MultipartFile file){
         CsvFileDto csvFile = csvFileService.createCsvFile(workspaceId, file);
