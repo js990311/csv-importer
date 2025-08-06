@@ -28,7 +28,7 @@ public class FilePreviewService {
             String line;
             int cnt = 0;
             while ((line=reader.readLine())!= null && cnt < PREVIEW_LIMIT){
-                sb.append(line);
+                sb.append(line).append("\n");
                 cnt++;
             }
             return sb.toString();

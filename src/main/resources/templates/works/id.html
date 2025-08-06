@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <title>Work</title>
     <link rel="stylesheet" th:href="@{/css/pico.min.css}">
+    <link rel="stylesheet" th:href="@{/css/prism.css}">
 </head>
 <body>
 <h1 th:text="${work.originalFileName}"></h1>
 <a th:href="@{/download(fileName=${work.storedFileName})}" th:text="${work.storedFileName}"></a>
 <p th:text="${work.uploadTime}"></p>
 <a th:href="@{/workspaces/{workspaceId}(workspaceId=${work.workspaceId})}">workspace로 가기</a>
-<script th:src="@{/js/htmx.min.js}"></script>
 
 <div>
     <button
@@ -20,8 +20,11 @@
     >
         미리보기
     </button>
-    <p id="file-preview"></p>
+    <div id="file-preview"></div>
 </div>
+
+<script th:src="@{/js/prism.js}"></script>
+<script th:src="@{/js/htmx.min.js}"></script>
 
 </body>
 </html>

@@ -26,6 +26,7 @@ public class CsvFileViewController {
     public String getDatafilePreview(@PathVariable("dataId") long dataId, Model model){
         String previewContent = csvFileService.previewDataFile(dataId);
         model.addAttribute("preview", previewContent);
+        model.addAttribute("type", "csv");
         return "fragments::filePreview";
     }
 

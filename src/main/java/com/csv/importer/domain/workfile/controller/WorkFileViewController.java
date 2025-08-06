@@ -29,6 +29,7 @@ public class WorkFileViewController {
     public String getWorkfilePreview(@PathVariable("workId") long workId, Model model){
         String previewContent = workFileService.previewWorkFile(workId);
         model.addAttribute("preview", previewContent);
+        model.addAttribute("type", "yaml");
         return "fragments::filePreview";
     }
 

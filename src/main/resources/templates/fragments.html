@@ -7,7 +7,14 @@
 <body>
 
 <th:block th:fragment="filePreview">
-    <p th:text="${preview}"></p>
+    <pre>
+        <code
+                th:class="|lang-${type}|"
+                th:text="${preview}"
+        >
+
+        </code>
+    </pre>
 </th:block>
 
 </body>
