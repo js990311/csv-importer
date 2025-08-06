@@ -11,5 +11,17 @@
 <p th:text="${work.uploadTime}"></p>
 <a th:href="@{/workspaces/{workspaceId}(workspaceId=${work.workspaceId})}">workspace로 가기</a>
 <script th:src="@{/js/htmx.min.js}"></script>
+
+<div>
+    <button
+        th:hx-get="@{/works/{id}/preview(id=${work.id})}"
+        hx-target="#file-preview"
+        hx-swap="innerHTML"
+    >
+        미리보기
+    </button>
+    <p id="file-preview"></p>
+</div>
+
 </body>
 </html>

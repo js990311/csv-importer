@@ -6,6 +6,7 @@ import com.csv.importer.domain.workfile.repository.WorkFileRepository;
 import com.csv.importer.domain.workspace.entity.Workspace;
 import com.csv.importer.domain.workspace.repository.WorkspaceRepository;
 import com.csv.importer.utils.file.FileExtensionUtils;
+import com.csv.importer.utils.file.FilePreviewService;
 import com.rejs.csvloader.file.FileSystemAccessObject;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,6 +28,8 @@ public class WorkFileService {
     private final FileSystemAccessObject fileSAO;
 
     private final WorkspaceRepository workspaceRepository;
+
+    private final FilePreviewService filePreviewService;
 
     // CREATE
     @Transactional
@@ -52,6 +55,11 @@ public class WorkFileService {
 
     public List<WorkFileDto> findWorkByWorkspaceId(long workspaceId){
         return workFileRepository.findWorkByWorkspaceId(workspaceId).stream().map(WorkFileDto::of).toList();
+    }
+
+    public String previewWorkFile(Long id){
+        WorkFile workFile = workFileRepository.findById(id).orElseThrow();
+        return filePreviewService.previewFile(workFile.getStoredFileName());
     }
 
     // UPDATE

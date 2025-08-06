@@ -25,6 +25,13 @@ public class WorkFileViewController {
         return "works/id";
     }
 
+    @GetMapping("/works/{workId}/preview")
+    public String getWorkfilePreview(@PathVariable("workId") long workId, Model model){
+        String previewContent = workFileService.previewWorkFile(workId);
+        model.addAttribute("preview", previewContent);
+        return "fragments::filePreview";
+    }
+
     @GetMapping("/workspaces/{workspaceId}/works")
     public String getWorks(@PathVariable("workspaceId") long workspaceId, Model model){
         List<WorkFileDto> works = workFileService.findWorkByWorkspaceId(workspaceId);
